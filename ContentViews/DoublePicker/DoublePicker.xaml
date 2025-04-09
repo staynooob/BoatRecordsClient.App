@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoatRecords.ContentViews.DoublePicker.DoublePicker"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+>
+    <HorizontalStackLayout Spacing="10">
+        <Picker
+            Title="{Binding CategoryTitle}"
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding SelectedCategory}"
+            >
+            <Picker.Behaviors>
+                <toolkit:EventToCommandBehavior
+                    EventName="SelectedIndexChanged"
+                    Command="{Binding ChangeCategoryCommand}" />
+            </Picker.Behaviors>
+        </Picker>
+        <Picker
+            Title="{Binding SubCategoryTitle}"
+            MinimumWidthRequest="150"
+            ItemsSource="{Binding SubCategories}"
+            SelectedIndex="{Binding SelectedSubCategoryIndex}"
+            >
+            <Picker.Behaviors>
+                <toolkit:EventToCommandBehavior
+                    EventName="SelectedIndexChanged"
+                    Command="{Binding ChangeSubCategoryCommand}" />
+            </Picker.Behaviors>
+        </Picker>
+    </HorizontalStackLayout>
+</ContentView>
