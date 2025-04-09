@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BoatRecords.Pages.EditRecord"
+             xmlns:doublePicker="clr-namespace:BoatRecords.ContentViews.DoublePicker"
+             >
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="DarkRed" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20,10"
+            Spacing="10"
+            MaximumWidthRequest="600">
+ 
+            <Label
+                Text="Datum jízdy"
+                VerticalOptions="Center" 
+                HorizontalOptions="End" />
+            <DatePicker HorizontalOptions="End" Format="d.M.yyyy" Date="{Binding RideDate}"/>
+
+            <Label
+                Text="Loď"
+                HorizontalOptions="Start" />
+            <doublePicker:DoublePicker BindingContext="{Binding Boat}" HorizontalOptions="Start" MinimumWidthRequest="200"/>
+
+            <Label
+                Text="Posádka"
+                HorizontalOptions="Start" />
+            <CollectionView
+                ItemsSource="{Binding Crew}"
+                HorizontalOptions="Start">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <doublePicker:DoublePicker />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label
+                Text="Počet kilometrů"
+                HorizontalOptions="Start" />
+            <Entry HorizontalOptions="Start" MinimumWidthRequest="100" Text="{Binding Distance}">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="1.0"
+                        MaximumValue="100.0"
+                        MaximumDecimalPlaces="1" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Grid HorizontalOptions="End" ColumnSpacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Upravit" Grid.Column="0" Command="{Binding SubmitValuesCommand}"/>
+                <Button Text="Zrušit" Grid.Column="1" Command="{Binding GoBackCommand}"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

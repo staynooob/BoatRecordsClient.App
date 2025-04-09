@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoatRecords.Pages.DisplayRecords"
+             xmlns:entities="clr-namespace:BoatRecords.Models.Entities">
+
+    <VerticalStackLayout Padding="20,10" Spacing="5" MaximumWidthRequest="600">
+        <DatePicker Date="{Binding Date, Mode=TwoWay}" HorizontalOptions="End" />
+        <ListView ItemsSource="{Binding Records}" SelectedItem="{Binding Record}" MaximumHeightRequest="750">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="entities:Record">
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding DateOfRide}" />
+                            <Label Grid.Column="1" Text="{Binding Boat}" />
+                            <Label Grid.Column="2" Text="{Binding Distance}" />
+                            <ListView ItemsSource="{Binding Crew}" Grid.Row="1" Grid.ColumnSpan="3" SelectionMode="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate  x:DataType="entities:User">
+                                        <ViewCell>
+                                            <Label Text="{Binding Name}"/>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid HorizontalOptions="End" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Odstranit" Grid.Column="0" Command="{Binding DeleteValuesCommand}" IsVisible="{Binding IsItemSelected}"/>
+            <Button Text="Upravit" Grid.Column="1" Command="{Binding SubmitValuesCommand}" IsVisible="{Binding IsItemSelected}"/>
+            <Button Text="Zpět" Grid.Column="2" Command="{Binding GoBackCommand}"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

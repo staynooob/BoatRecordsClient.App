@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BoatRecords.Pages.CreateBoat"
+             xmlns:converters="clr-namespace:BoatRecords.Converters"
+             >
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="DarkRed" />
+        </Style>
+        <ResourceDictionary>
+            <converters:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="20,10" Spacing="5" MaximumWidthRequest="600">
+        <Grid RowSpacing="5" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="Kategorie"/>
+            <Picker Grid.Column="1"  ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}"/>
+            <Label Grid.Row="1" Text="Jméno"/>
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Name}">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="1"
+                        RegexPattern="[A-Za-z]" />
+                </Entry.Behaviors>
+            </Entry>
+        </Grid>
+
+        <Grid HorizontalOptions="End" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Přidat" Grid.Column="0" Command="{Binding SubmitValuesCommand}"/>
+            <Button Text="Zpět" Grid.Column="1" Command="{Binding GoBackCommand}"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

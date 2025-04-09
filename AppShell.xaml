@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="BoatRecordsClient.AppShell"
+    x:Class="BoatRecords.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BoatRecordsClient"
+    xmlns:pages="clr-namespace:BoatRecords.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
 
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:CreateRecord}"
+      Route="CreateRecord" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:DisplayRecords}"
+      Route="DisplayRecords" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:MainMenu}"
+      Route="MainMenu" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:SignInForm}"
+      Route="SignInForm" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:UserOverview}"
+      Route="UserOverview" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:CreateUser}"
+      Route="CreateUser" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:EditUser}"
+      Route="EditUser" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:BoatOverview}"
+      Route="BoatOverview" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:CreateBoat}"
+      Route="CreateBoat" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:EditBoat}"
+      Route="EditBoat" />
+
+    <ShellContent
+      ContentTemplate="{DataTemplate pages:EditRecord}"
+      Route="EditRecord" />
 </Shell>

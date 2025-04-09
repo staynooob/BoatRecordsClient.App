@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoatRecords.Pages.MainMenu">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25" MaximumWidthRequest="600">
+            <Label Text="VKL" TextColor="{StaticResource Tertiary}" FontSize="80" HorizontalOptions="Center" FontAttributes="Bold"/>
+            <ImageButton
+                x:Name="LoginUserBtn"
+                HorizontalOptions="End"
+                Source="user_logged_out.svg"
+                MaximumWidthRequest="50"
+                MaximumHeightRequest="50"
+                SemanticProperties.Hint="Přihlášení uživatele"
+                Command="{Binding SignInCommand}"/>
+
+            <Button
+                x:Name="WriteRidesBtn"
+                Text="Zapsat jízdu" 
+                SemanticProperties.Hint="Otevře okno pro zápisy jízd"
+                Command="{Binding WriteRecordCommand}"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="ViewRecordsBtn"
+                Text="Zkontrolovat zápisy" 
+                SemanticProperties.Hint="Otevře okno s dnešními zápisy"
+                Command="{Binding DisplayRecordsCommand}"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="EditUsersBtn"
+                Text="Editovat uživatele" 
+                SemanticProperties.Hint="Umožňuje měnit uživatele pro zápis"
+                HorizontalOptions="Fill"
+                Command="{Binding EditUsersCommand}"
+                IsVisible="{Binding IsUserSignedIn}"/>
+            <Button
+                x:Name="EditBoatsBtn"
+                Text="Editovat lodě" 
+                SemanticProperties.Hint="Umožňuje měnit lodě"
+                HorizontalOptions="Fill"
+                Command="{Binding EditBoatsCommand}"
+                IsVisible="{Binding IsUserSignedIn}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
